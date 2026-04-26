@@ -12,7 +12,7 @@ const PrivateRouter = ({ children }) => {
     }
 
     if(!user){
-  return <Navigate to="/login" state={location.pathname} />;
+         return <Navigate to="/registration" state={location?.pathname} />;
     
     }
     return children;

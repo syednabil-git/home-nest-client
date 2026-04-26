@@ -2,10 +2,12 @@ import axios from 'axios';
 import React from 'react'
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
-import useAxios from '../hooks/useAxios';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+// import useAxios from '../hooks/useAxios';
 
 const AddProperty = () => {
-  const axiosInstance = useAxios();
+  // const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth()
   const handleAddProperty = e =>{
     e.preventDefault();
@@ -17,14 +19,15 @@ const AddProperty = () => {
     const date = e.target.date.value;
     const description = e.target.description.value;
     const seller_contact = e.target.seller_contact.value;
-    console.log(propertyName, image, propertyPrice, location, seller_image, date);
+    const category = e.target.category.value;
+    console.log(propertyName, image, propertyPrice, location, seller_image, date, category);
 
-    const newProperties = {propertyName, image, propertyPrice, location, seller_image, date, description, seller_contact, 
+    const newProperties = {propertyName, image, propertyPrice, location, seller_image, date, description, seller_contact, category, 
       email: user.email,
       user_name: user.displayName
     };
     
-    axiosInstance.post('/products', newProperties)
+    axiosSecure.post('/products', newProperties)
     .then(data => {
       console.log(data.data);
       if(data.data.insertedId){

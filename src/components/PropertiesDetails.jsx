@@ -1,13 +1,13 @@
 import React, { use, useEffect, useRef, useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { NavLink, useLoaderData } from 'react-router';
 import { AuthContext } from '../contexts/AuthContex';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const PropertiesDetails = () => {
-  const { _id: product_id } = useLoaderData();
+  const { product_id } = useLoaderData();
   const ratingModalRef = useRef(null);
-
+  const [product, setProduct] = useState({});
   const [ratings, setRatings] = useState([]);
   const [selectedRating, setSelectedRating] = useState(0);
   const { user } = use(AuthContext);
@@ -17,20 +17,15 @@ const PropertiesDetails = () => {
       .then(data => {
         console.log('after axios get', data)
         setRatings(data.data);
-      })
+      });
+       axios.get(`http://localhost:3000/products/${product_id}`)
+        .then(res => {
+          setProduct(res.data);
+        });
     }, [product_id])
 
 
-  // fetch ratings
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/products/rating/${product_id}`)
-  //     .then(res => res.json())
-  //     .then(data => setRatings(data));
-  // }, [product_id]);
-
-  // average rating
-  const avgRating =
-    ratings.length > 0
+  const avgRating = ratings.length > 0
       ? (
           ratings.reduce((sum, r) => sum + r.rating, 0) /
           ratings.length
@@ -45,20 +40,26 @@ const PropertiesDetails = () => {
       alert("Please select rating");
       return;
     }
-
+    
+    
     const name = e.target.name.value;
     const email = e.target.email.value;
-    const date = e.target.date.value;
-    const description = e.target.description.value;
+    const posted_date = e.target.posted_date.value;
+    const shortDescription = e.target.shortDescription.value;
+  
 
     const newRating = {
       product: product_id,
+      propertyName:product.propertyName,
+      image: product.image,
       user_name: name,
-      user_email: email,
+      email,
       user_photo: user?.photoURL,
+      propertyPrice: product.propertyPrice,
       rating: selectedRating,
-      description,
-      date,
+      shortDescription,
+      posted_date,
+      category: product.category,
     };
 
     fetch('http://localhost:3000/rating', {
@@ -69,21 +70,33 @@ const PropertiesDetails = () => {
       .then(res => res.json())
       .then(data => {
         if (data.insertedId) {
-          ratingModalRef.current.close();
-          setSelectedRating(0);
 
-          // UI update instantly
-          setRatings([...ratings, newRating]);
+    ratingModalRef.current.close();
+    setSelectedRating(0);
 
-          Swal.fire({
-            icon: "success",
-            title: "Review Added",
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        }
-      });
-  };
+    const ratingWithId = {
+      ...newRating,
+      _id: data.insertedId
+    };
+
+    setRatings(prev => {
+      const updated = [...prev, ratingWithId];
+
+      // optional sorting
+      updated.sort((a, b) => b.rating - a.rating);
+
+      return updated;
+    });
+
+    Swal.fire({
+      icon: "success",
+      title: "Review Added",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  }
+  });
+};
 
   // ⭐ star display function
   const renderStars = (value) => {
@@ -91,11 +104,11 @@ const PropertiesDetails = () => {
       <div className="flex">
         {[1, 2, 3, 4, 5].map((star) => {
           if (value >= star) {
-            return <span key={star} className="text-yellow-400">★</span>;
+            return <span key={star} className="text-yellow-400 text-2xl">★</span>;
           } else if (value >= star - 0.5) {
-            return <span key={star} className="text-yellow-400">⯨</span>;
+            return <span key={star} className="text-yellow-400 text-2xl">⯨</span>;
           } else {
-            return <span key={star} className="text-gray-300">☆</span>;
+            return <span key={star} className="text-gray-300 text-2xl">☆</span>;
           }
         })}
       </div>
@@ -104,10 +117,97 @@ const PropertiesDetails = () => {
 
   return (
    <div className="bg-gray-100 max-w-7xl mx-auto p-4 md:p-10">
-    
-    
-      <div className="max-w-3xl mx-auto p-4">
+    {/* properties details section */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
+    {/* ================= LEFT SIDE ================= */}
+    <div className="space-y-4">
+
+      <figure className="px-5 pt-5">
+         <img
+           src={product.image}
+            alt=""
+           className="rounded-xl w-full h-74" />
+           <span className="absolute top-23 md:top-30 left-7 md:left-95 bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-semibold">
+            {product.category}
+            </span>
+         </figure>
+
+      <div className="bg-white p-5 rounded-xl shadow">
+        <h3 className="font-bold text-xl">Product Description</h3>
+
+
+        <div className="my-3 border-t"></div>
+
+        <p className="text-gray-600">{product.shortDescription}</p>
+      </div>
+
+    </div>
+
+    {/* ================= RIGHT SIDE ================= */}
+    <div className="space-y-4">
+
+      <NavLink
+        to="/"
+        className="text-sm font-semibold text-purple-600 flex items-center gap-1"
+      >
+        ← Back to Products
+      </NavLink>
+
+      <h1 className="text-2xl md:text-3xl font-bold">
+        {product.propertyName}
+      </h1>
+
+      {/* Price */}
+      <div className="bg-white p-4 rounded-xl shadow">
+        <p className="text-green-500 font-bold text-lg">
+          ${product.propertyPrice}
+        </p>
+        <p className="text-sm text-gray-500">Price</p>
+      </div>
+
+      {/* Product Info */}
+      <div className="bg-white p-4 rounded-xl shadow text-sm space-y-1">
+        <p><b>Product ID:</b> {product._id}</p>
+        <p><b>Posted Date:</b> {product.posted_date}</p>
+      </div>
+
+      {/* Seller Info */}
+      <div className="bg-white p-4 rounded-xl shadow">
+
+        <h2 className="font-bold mb-3">Seller Information</h2>
+
+        <div className="flex items-center gap-3">
+          <img
+            className="w-12 h-12 rounded-full object-cover"
+            src={product.seller_image}
+            alt="seller"
+          />
+
+          <div>
+            <p className="font-semibold">{product.user_name}</p>
+            <p className="text-sm text-gray-500">{product.email}</p>
+          </div>
+        </div>
+
+        <div className="mt-3 space-y-1 text-sm">
+          <p><b>Location:</b> {product.location}</p>
+          <p><b>Contact:</b> {product.seller_contact}</p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+    {/* MyRatings section */}
+      <div className="max-w-3xl mx-auto p-4">
+        
+        <h1 className='text-3xl font-bold text-center mt-10'>Rating & Review</h1>
+        <progress className="progress w-full text-blue-500"></progress>
       {/* ===== HEADER ===== */}
       <div className="flex justify-between items-center mb-6">
         <div>
@@ -131,9 +231,9 @@ const PropertiesDetails = () => {
         {ratings.map((item) => (
           <div
             key={item._id}
-            className="border rounded-xl p-4 shadow-sm"
+            className=" rounded-xl p-4 shadow-lg"
           >
-            <div className="flex justify-between">
+            <div className="flex justify-start gap-20">
               <div className='flex justify-center gap-2'>
                 <img
                  src={item.user_photo}
@@ -142,15 +242,15 @@ const PropertiesDetails = () => {
                   />
                 <div>
                  <h3 className="font-semibold">{item.user_name}</h3>
-                 <p className="text-xs text-gray-400">{item.date}</p>
+                 <p className="text-xs text-gray-400">{item.posted_date}</p>
                 </div>
               </div>
 
               {renderStars(item.rating)}
             </div>
 
-            <p className="mt-2 text-gray-700">
-              {item.description}
+            <p className="mt-2 text-gray-700 ml-12 font-semibold">
+              {item.shortDescription}
             </p>
           </div>
         ))}
@@ -189,12 +289,12 @@ const PropertiesDetails = () => {
 
             </div>
 
-            <textarea name="description" className="textarea w-full" placeholder="Write review" required />
+            <textarea name="shortDescription" className="textarea w-full" placeholder="Write review" required />
 
-            <input type="date" name="date" defaultValue={new Date().toISOString().split("T")[0]} className="input w-full" />
+            <input type="date" name="posted_date" defaultValue={new Date().toISOString().split("T")[0]} className="input w-full" />
 
             {/* ⭐ STAR INPUT */}
-            <div className="flex gap-1 text-3xl">
+            <div className="flex gap-1 text-6xl">
               {[1, 2, 3, 4, 5].map((star) => (
                 <span
                   key={star}

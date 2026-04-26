@@ -1,27 +1,21 @@
 import React, { use, useEffect, useState } from 'react'
 import { AuthContext } from '../contexts/AuthContex'
 import { useLoaderData } from 'react-router';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyRating = () => {
-
   const { user } = use (AuthContext);
   const [ratings, setRatings] = useState([])
-  
-
-  useEffect(() => {
+  const [product, setProduct] = useState({});
+  const axiosSecure = useAxiosSecure();
+  useEffect( () => {
     if(user?.email) {
-      fetch(`http://localhost:3000/rating?email=${user.email}`,{
-        headers:{
-          authorization: `Bearer ${user.accessToken}`
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setRatings(data)
-      })
+      axiosSecure.get(`/rating?user_email=${user.email}`)
+      .then(res => setRatings(res.data))
     }
-  }, [user])
+       
+  }, [user, axiosSecure])
+
 
   const renderStars = (value) => {
     return (
@@ -44,27 +38,26 @@ const MyRating = () => {
         {ratings.map((item) => (
           <div
             key={item._id}
-            className="border rounded-xl p-4 shadow-sm"
+            className="rounded-xl shadow-sm pr-10 py-5"
           >
             <div className="flex justify-between">
-              <div className='flex justify-center gap-2'>
+              <div className='flex justify-center '>
                 <img
-                 src={item.user_photo}
+                 src={item.productInfo?.image || item.image}
                   alt="user"
-                 className="w-10 h-10 rounded-full object-cover"
+                 className="w-50 h-25 rounded-lg object-cover  mr-3"
                   />
                 <div>
-                 <h3 className="font-semibold">{item.user_name}</h3>
-                 <p className="text-xs text-gray-400">{item.date}</p>
+                 <h3 className="font-semibold">{item.productInfo?.propertyName}</h3>
+                 <div className="text-lg">{renderStars(item.rating)}</div>
+                 <div className=" text-gray-700 text-lg font-semibold">
+                   {item.description}
+                 </div>
                 </div>
               </div>
 
-              {renderStars(item.rating)}
+              <p className="text-xs text-gray-700 font-bold">{item.date}</p>
             </div>
-
-            <p className="mt-2 text-gray-700">
-              {item.description}
-            </p>
           </div>
         ))}
       </div>
@@ -72,4 +65,4 @@ const MyRating = () => {
   )
 }
 
-export default MyRating
+export default MyRating;
