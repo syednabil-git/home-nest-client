@@ -2,6 +2,7 @@ import React, { use, useEffect, useRef, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../contexts/AuthContex';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const PropertiesDetails = () => {
   const { _id: product_id } = useLoaderData();
@@ -11,13 +12,21 @@ const PropertiesDetails = () => {
   const [selectedRating, setSelectedRating] = useState(0);
   const { user } = use(AuthContext);
   
+    useEffect(() => {
+      axios.get(`http://localhost:3000/products/rating/${product_id}`)
+      .then(data => {
+        console.log('after axios get', data)
+        setRatings(data.data);
+      })
+    }, [product_id])
+
 
   // fetch ratings
-  useEffect(() => {
-    fetch(`http://localhost:3000/products/rating/${product_id}`)
-      .then(res => res.json())
-      .then(data => setRatings(data));
-  }, [product_id]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/products/rating/${product_id}`)
+  //     .then(res => res.json())
+  //     .then(data => setRatings(data));
+  // }, [product_id]);
 
   // average rating
   const avgRating =

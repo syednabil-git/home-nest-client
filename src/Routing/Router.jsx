@@ -26,7 +26,9 @@ export const router = createBrowserRouter([
       {
         path: '/propertiesDetails/:id',
         loader: ({params}) => fetch(`http://localhost:3000/products/${params.id}`),
-        element: <PropertiesDetails></PropertiesDetails>
+        element: <PrivateRouter>
+                <PropertiesDetails></PropertiesDetails>
+        </PrivateRouter>
       },
       {
         path: "/my-rating",

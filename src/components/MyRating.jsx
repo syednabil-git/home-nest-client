@@ -21,7 +21,7 @@ const MyRating = () => {
         setRatings(data)
       })
     }
-  }, [user?.email])
+  }, [user])
 
   const renderStars = (value) => {
     return (
