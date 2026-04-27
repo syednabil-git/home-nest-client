@@ -6,6 +6,10 @@ import { FaHome } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  const navLinkClass = ({ isActive }) =>
+  isActive
+    ? "text-blue-600 font-semibold border-b-2 border-blue-600"
+    : "hover:text-blue-500 transition";
 
   const handleSignOut = () => {
     signOutUser()
@@ -27,11 +31,11 @@ const Navbar = () => {
       <ul
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/all-property">All Properties</Link></li>
-        <li><Link to="/myproperty">My Properties</Link></li>
-        <li><Link to="/my-rating">My Rating</Link></li>
-        <li><Link to="/add-property">Add Property</Link></li>
+        <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
+        <li><NavLink to="/all-property" className={navLinkClass}>All Properties</NavLink></li>
+        <li><NavLink to="/myproperty" className={navLinkClass}>My Properties</NavLink></li>
+        <li><NavLink to="/my-rating" className={navLinkClass}>My Rating</NavLink></li>
+        <li><NavLink to="/add-property" className={navLinkClass}>Add Property</NavLink></li>
       </ul>
     </div>
     <div className='flex justify-center items-center gap-2'>
@@ -42,13 +46,13 @@ const Navbar = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><Link to="/">Home</Link></li>
-        <li><Link to="/all-property">All Properties</Link></li>
+      <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
+        <li><NavLink to="/all-property" className={navLinkClass}>All Properties</NavLink></li>
          {
           user && <>
-            <li><NavLink to="/myproperty">My Properties</NavLink></li>
-            <li><NavLink to="/my-rating">My Rating</NavLink></li>
-            <li><NavLink to="/add-property">Add Property</NavLink></li>
+            <li><NavLink to="/myproperty" className={navLinkClass}>My Properties</NavLink></li>
+            <li><NavLink to="/my-rating" className={navLinkClass}>My Rating</NavLink></li>
+            <li><NavLink to="/add-property" className={navLinkClass}>Add Property</NavLink></li>
           </>
          }
         
