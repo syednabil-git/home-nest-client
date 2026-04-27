@@ -1,16 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LatestProperties from './LatestProperties';
 import cover from "../assets/cover.png";
 import { FaSearch, FaSearchLocation } from 'react-icons/fa';
 import { MdVerifiedUser } from 'react-icons/md';
 import { LiaHandHoldingHeartSolid } from 'react-icons/lia';
 import { CiTimer } from 'react-icons/ci';
-
+import axios from 'axios';
+import Property from './Property';
 
 const LatestPropertiesPromise = fetch('http://localhost:3000/latest-properties')
 .then(res => res.json());
+
 const Home = () => {
-  return (
+ const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+
+useEffect(() => {
+  axios.get('http://localhost:3000/products')
+  .then(res => setProducts(res.data));
+}, []);
+
+const filteredProducts = products.filter(product => {
+  const keyword = search.toLowerCase();
+
+  return(
+    product.propertyName?.toLowerCase().includes(keyword) || 
+    product.category?.toLowerCase().includes(keyword)
+  );
+});
+
+const displayProducts = search ? filteredProducts : [];
+  
+return (
   <div className='mx-auto'>
     <div
       className="h-120 bg-cover bg-center rounded-lg"
@@ -22,15 +43,29 @@ const Home = () => {
        <p className='text-gray-100 mt-3'>Discover the perfect place to call home.<br></br> Explore the thousands of verified Properties</p>
     </div>
     </div>
-    <div className="mt-[-100px] flex justify-center items-center rounded-l-full shadow-2xl m">
+    <div className="mt-[-80px] flex justify-center items-center rounded-l-full shadow-2xl overflow-hidden">
             <input
               type="text"
               onChange={(e) => setSearch(e.target.value)}
+              value={search}
               placeholder="Search For Properties, Category..."
               className="w-150 px-5 py-3 outline-none bg-white rounded-l-full"
             />
             <button className='btn h-12 rounded-r-full outline-none bg-linear-to-r from-[#e32e52] to-[#0b03b5] w-20 text-white text-xl'><FaSearch></FaSearch> </button>
       </div>  
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mt-5 text-center items-center">
+     {
+        search && (
+        displayProducts.length === 0 ? (
+          <p className="text-center text-gray-500 text-3xl ">No properties found</p>
+                                        ) : (
+             displayProducts.slice(0, 4).map(product => (
+          <Property key={product._id} property={product} />
+              ))
+            )
+          )
+      }
     </div>
     <div className="flex items-center justify-center text-center overflow-hidden max-w-[1250px] mx-auto mr-4"> 
      <LatestProperties LatestPropertiesPromise={LatestPropertiesPromise}></LatestProperties>
@@ -117,7 +152,7 @@ const Home = () => {
       </div>
 
                    {/* what our client say */}
-       <h1 className='font-bold text-3xl text-center mt-10'>What Our Clients Say</h1>
+       <h1 className='font-bold text-3xl text-center mt-10 mb-3'>What Our Clients Say</h1>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-2 px-20 mt-2'>
           <div className="max-w-xl mx-auto bg-white rounded-xl shadow-md p-4 space-y-3">
 
