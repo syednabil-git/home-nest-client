@@ -8,13 +8,17 @@ const MyRating = () => {
   const [ratings, setRatings] = useState([])
   const [product, setProduct] = useState({});
   const axiosSecure = useAxiosSecure();
-  useEffect( () => {
-    if(user?.email) {
-      axiosSecure.get(`/rating?user_email=${user.email}`)
-      .then(res => setRatings(res.data))
-    }
-       
-  }, [user, axiosSecure])
+ useEffect(() => {
+  if (!user?.email) return;
+
+  axiosSecure
+    .get(`/rating?email=${user.email}`)
+    .then(res => {
+      console.log("ratings:", res.data);
+      setRatings(res.data);
+    })
+    .catch(err => console.log(err));
+}, [user?.email]);
 
 
   const renderStars = (value) => {
@@ -34,6 +38,7 @@ const MyRating = () => {
   };
   return (
     <div>
+      <h1 className='text-3xl font-bold my-10 text-center'> My Ratings</h1>
        <div className="space-y-4">
         {ratings.map((item) => (
           <div
@@ -48,15 +53,15 @@ const MyRating = () => {
                  className="w-50 h-25 rounded-lg object-cover  mr-3"
                   />
                 <div>
-                 <h3 className="font-semibold">{item.productInfo?.propertyName}</h3>
+                 <h3 className="font-semibold">{item.propertyName}</h3>
                  <div className="text-lg">{renderStars(item.rating)}</div>
                  <div className=" text-gray-700 text-lg font-semibold">
-                   {item.description}
+                   {item.shortDescription}
                  </div>
                 </div>
               </div>
 
-              <p className="text-xs text-gray-700 font-bold">{item.date}</p>
+              <p className="text-xs text-gray-700 font-bold">{item.posted_date}</p>
             </div>
           </div>
         ))}
