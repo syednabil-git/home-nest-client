@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const Property = ({property}) => {
  
-    const { propertyName, image, propertyPrice, location, category, product_id } = property;
+    const { propertyName, image, propertyPrice, location, category, _id } = property;
   return (
     <div className='mx-auto'>
        <div className='card-items 0 p-2 ml-1 mx-auto max-w-[1250px] items-center'>
@@ -24,7 +24,7 @@ const Property = ({property}) => {
        <p className='text-gray-600 font-semibold'>{location}</p>
        <p className='text-blue-700 font-semibold text-lg'>Price: ${propertyPrice}</p>
       <div className="w-full">
-           <Link to={`/propertiesDetails/${product_id}`} className=" p-[1.5px] rounded-sm bg-gradient-to-r from-[#0e03ef] to-[#02baed] inline-block w-full"><button className='px-5 py-[6px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition w-full'><span className=' bg-linear-to-r from-[#e32e49] to-[#9F62F2] bg-clip-text text-transparent'>View Details</span></button></Link> 
+           <Link to={`/propertiesDetails/${property._id}`} className=" p-[1.5px] rounded-sm bg-gradient-to-r from-[#0e03ef] to-[#02baed] inline-block w-full"><button className='px-5 py-[6px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition w-full'><span className=' bg-linear-to-r from-[#e32e49] to-[#9F62F2] bg-clip-text text-transparent'>View Details</span></button></Link> 
        </div>
        
       </div>

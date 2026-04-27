@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContex';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
-
-
-
 const MyProperty = () => {
   const axiosSecure = useAxiosSecure();
   const [products, setProducts] = useState([]);
@@ -119,14 +116,10 @@ const MyProperty = () => {
                 <td className="p-3 font-medium">{product.propertyName}</td>
                 <td className="p-3">$ {product.propertyPrice}</td>
                 <td className="p-3 ">{console.log(product)}{product.category}</td>
-                
-
-                
-
                 <td className="p-3">
                   <div className="flex justify-center gap-2">
-                  <Link to={`/edit-product/${product._id}`} className=" p-[2px] rounded-sm bg-gradient-to-r from-[#632EE3] to-[#9F62F2] inline-block"><button className='px-3 py-[3px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition'><span className=' bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent'>Edit</span></button></Link>
-                  <button onClick={() => handleDelete(product._id)} className=" p-[2px] rounded-sm bg-gradient-to-r from-[#e32e40] to-[#7504ed] inline-block"><button className='px-3 py-[3px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition'><span className=' bg-linear-to-r from-[#e32e34] to-[#9F62F2] bg-clip-text text-transparent'>Delete</span></button></button>
+                  <Link to={`/edit-properties/${product._id}`} className=" p-[2px] rounded-sm bg-gradient-to-r from-[#632EE3] to-[#9F62F2] inline-block"><button className='px-3 py-[3px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition'><span className=' bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent'>Edit</span></button></Link>
+                  <button onClick={() => handleDelete(product._id)} className=" p-[2px] rounded-sm bg-gradient-to-r from-[#e32e40] to-[#7504ed] inline-block"><span className='px-3 py-[3px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition'><span className=' bg-linear-to-r from-[#e32e34] to-[#9F62F2] bg-clip-text text-transparent'>Delete</span></span></button>
                   <Link to="" className=" p-[2px] rounded-sm bg-gradient-to-r from-[#2ee343] to-[#9F62F2] inline-block"><button className='px-3 py-[3px] rounded-sm bg-white font-semibold hover:bg-gray-100 transition'><span className=' bg-linear-to-r from-[#0a9d03] to-[#9F62F2] bg-clip-text text-transparent'>Make Sold</span></button></Link>
                   </div>
                 </td>

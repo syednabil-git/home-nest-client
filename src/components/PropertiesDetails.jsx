@@ -1,36 +1,37 @@
-import React, { use, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, useLoaderData } from 'react-router';
 import { AuthContext } from '../contexts/AuthContex';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const PropertiesDetails = () => {
-  const { product_id } = useLoaderData();
+   const product = useLoaderData();
+  const productId = product?._id?.toString();
   const ratingModalRef = useRef(null);
-  const [product, setProduct] = useState({});
   const [ratings, setRatings] = useState([]);
   const [selectedRating, setSelectedRating] = useState(0);
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   
-    useEffect(() => {
-      axios.get(`http://localhost:3000/products/rating/${product_id}`)
-      .then(data => {
-        console.log('after axios get', data)
-        setRatings(data.data);
-      });
-       axios.get(`http://localhost:3000/products/${product_id}`)
-        .then(res => {
-          setProduct(res.data);
-        });
-    }, [product_id])
+  
+   useEffect(() => {
+  if (!productId) return;
+
+  axios
+    .get(`http://localhost:3000/products/rating/${productId}`)
+    .then(res => {
+      console.log('ratings:', res.data);
+      setRatings(res.data);
+    })
+    .catch(err => console.log(err));
+
+  console.log("product:", product);
+  console.log("productId:", productId);
+
+}, [productId]);
 
 
   const avgRating = ratings.length > 0
-      ? (
-          ratings.reduce((sum, r) => sum + r.rating, 0) /
-          ratings.length
-        ).toFixed(1)
-      : 0;
+      ? ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length : 0;
 
   // submit
   const handleRatingSubmit = (e) => {
@@ -40,8 +41,6 @@ const PropertiesDetails = () => {
       alert("Please select rating");
       return;
     }
-    
-    
     const name = e.target.name.value;
     const email = e.target.email.value;
     const posted_date = e.target.posted_date.value;
@@ -49,13 +48,13 @@ const PropertiesDetails = () => {
   
 
     const newRating = {
-      product: product_id,
+      product: productId,
       propertyName:product.propertyName,
       image: product.image,
       user_name: name,
       email,
       user_photo: user?.photoURL,
-      propertyPrice: product.propertyPrice,
+      propertyPrice:product.propertyPrice,
       rating: selectedRating,
       shortDescription,
       posted_date,
@@ -125,9 +124,9 @@ const PropertiesDetails = () => {
 
       <figure className="px-5 pt-5">
          <img
-           src={product.image}
+           src={product?.image}
             alt=""
-           className="rounded-xl w-full h-74" />
+           className="rounded-xl w-full h-[300px] object-cover" />
            <span className="absolute top-23 md:top-30 left-7 md:left-95 bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-semibold">
             {product.category}
             </span>
@@ -161,7 +160,7 @@ const PropertiesDetails = () => {
       {/* Price */}
       <div className="bg-white p-4 rounded-xl shadow">
         <p className="text-green-500 font-bold text-lg">
-          ${product.propertyPrice}
+          ${product?.propertyPrice}
         </p>
         <p className="text-sm text-gray-500">Price</p>
       </div>
@@ -180,7 +179,7 @@ const PropertiesDetails = () => {
         <div className="flex items-center gap-3">
           <img
             className="w-12 h-12 rounded-full object-cover"
-            src={product.seller_image}
+            src={product?.user_img}
             alt="seller"
           />
 
@@ -219,7 +218,7 @@ const PropertiesDetails = () => {
         </div>
 
         <button
-          onClick={() => ratingModalRef.current.showModal()}
+          onClick={() => ratingModalRef.current?.showModal()}
           className="btn bg-blue-600 text-white"
         >
           Add Review

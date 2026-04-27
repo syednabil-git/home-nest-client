@@ -9,6 +9,7 @@ import AllProperty from "../components/AllProperty";
 import PrivateRouter from "./PrivateRouter";
 import MyProperty from "../components/MyProperty";
 import PropertiesDetails from "../components/PropertiesDetails";
+import EditProperties from "../components/EditProperties";
 
 export const router = createBrowserRouter([
   {
@@ -24,11 +25,12 @@ export const router = createBrowserRouter([
         element: <AllProperty></AllProperty>
       },
       {
-        path: '/propertiesDetails/:id',
-        loader: ({params}) => fetch(`http://localhost:3000/products/${params.id}`),
-        element: <PrivateRouter>
-                <PropertiesDetails></PropertiesDetails>
-        </PrivateRouter>
+      path: "/propertiesDetails/:id",
+      loader: async ({ params }) => {
+      const res = await fetch(`http://localhost:3000/products/${params.id}`);
+      return res.json();
+      },
+        element: <PropertiesDetails />
       },
       {
         path: "/my-rating",
@@ -53,6 +55,10 @@ export const router = createBrowserRouter([
             <MyProperty></MyProperty>
           </PrivateRouter>
         ),
+      },
+      {
+        path: "/edit-properties/:id",
+        element: <EditProperties></EditProperties>,
       },
       
     ],
