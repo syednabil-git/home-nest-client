@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/all-product",
+        path: "/all-property",
         element: <AllProperty></AllProperty>
       },
       {
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/my-property",
+        path: "/myproperty",
         element: (
           <PrivateRouter>
             <MyProperty></MyProperty>

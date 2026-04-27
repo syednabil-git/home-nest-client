@@ -61,7 +61,7 @@ const MyProperty = () => {
 
         <div className="mt-3 flex gap-2">
           <Link
-            to={`/edit-product/${product._id}`}
+            to={`/edit-properties/${product._id}`}
             className="flex-1 text-center py-1 rounded bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold"
           >
             Edit

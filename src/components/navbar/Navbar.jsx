@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router'
 import { AuthContext } from '../../contexts/AuthContex';
+import { FaHome } from 'react-icons/fa';
 
 
 const Navbar = () => {
@@ -28,20 +29,24 @@ const Navbar = () => {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/all-property">All Properties</Link></li>
-        <li><Link to="/my-property">My Properties</Link></li>
+        <li><Link to="/myproperty">My Properties</Link></li>
         <li><Link to="/my-rating">My Rating</Link></li>
         <li><Link to="/add-property">Add Property</Link></li>
       </ul>
     </div>
-    <a className="text-xl ml-5 font-extrabold">Home<span className=' bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent'>Nest</span></a>
+    <div className='flex justify-center items-center gap-2'>
+      <span><FaHome style={{ color: "blue", fontSize: "30px" }} /></span>
+      <a className="text-3xl  font-extrabold text-black flex justify-center items-center"> Home<span className=' bg-linear-to-r from-[#b90303] to-[#2506ea] bg-clip-text text-transparent'>Nest</span></a>
+    </div>
+
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
       <li><Link to="/">Home</Link></li>
-        <li><Link to="/all-product">All Properties</Link></li>
+        <li><Link to="/all-property">All Properties</Link></li>
          {
           user && <>
-            <li><NavLink to="/my-property">My Properties</NavLink></li>
+            <li><NavLink to="/myproperty">My Properties</NavLink></li>
             <li><NavLink to="/my-rating">My Rating</NavLink></li>
             <li><NavLink to="/add-property">Add Property</NavLink></li>
           </>
