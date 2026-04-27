@@ -10,6 +10,7 @@ import PrivateRouter from "./PrivateRouter";
 import MyProperty from "../components/MyProperty";
 import PropertiesDetails from "../components/PropertiesDetails";
 import EditProperties from "../components/EditProperties";
+import NotFound from "../components/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -71,4 +72,8 @@ export const router = createBrowserRouter([
     path: "/registration",
     element: <Registration></Registration>
   },
+  {
+    path:"*",
+    element: <NotFound></NotFound>
+  }
 ]);
