@@ -44,7 +44,7 @@ const AddProperty = () => {
   return (
     <div>
       <form onSubmit={handleAddProperty}>
-        <div className='flex justify-between max-w-[1000px] mx-auto p-10 px-20 gap-5 items-start'>
+        <div className='flex justify-between max-w-[1280px] mx-auto px-4 md:px-30 gap-5 md:gap-20 items-start mt-15'>
             <div className='flex-1'>
               <fieldset className="fieldset">
               <legend className="fieldset-legend">Property Name</legend>
@@ -74,14 +74,14 @@ const AddProperty = () => {
              </div>  
         </div>
         {/* Your Product Image URL */}
-          <div className=' max-w-[1000px] mx-auto px-20 '>
+          <div className=' max-w-[1280px] mx-auto px-4 md:px-30 '>
              <fieldset className="fieldset">
               <legend className="fieldset-legend">Your Product Image URL</legend>
               <input type="text" name='image' className="input w-full" placeholder="https://..." />
               </fieldset>
           </div>
           {/* saler part   */}
-          <div className='flex justify-between items-center max-w-[1000px] mx-auto px-20 gap-5'>
+          <div className='flex justify-between items-center max-w-[1280px] mx-auto px-4 md:px-30 gap-5 md:gap-20'>
              <div className='flex-1'>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Saler Name</legend>
@@ -104,14 +104,14 @@ const AddProperty = () => {
              </div>
           </div>
           {/* location */}
-          <div className='max-w-[1000px] mx-auto px-20'>
+          <div className='max-w-[1280px] mx-auto px-4 md:px-30 gap-5 md:gap-20'>
                <fieldset className="fieldset">
                <legend className="fieldset-legend">Location</legend>
                <input type="text" name='location' className="input w-full" placeholder="City, Country" />
                </fieldset>
           </div>
           {/* Simple Description about your Product */}
-          <div className='max-w-[1000px] mx-auto px-20'>
+          <div className='max-w-[1280px] mx-auto px-4 md:px-30'>
              <fieldset className="fieldset">
                <legend className="fieldset-legend">Simple Description about your Properties</legend>
                <input type="text" name='description' className="input w-full h-30" placeholder="e.g. I bought this product 3 month ago. did not used more than 1/2 time. actually learning guitar is so tough..... " />
@@ -119,7 +119,7 @@ const AddProperty = () => {
           </div>
 
           {/* Button */}
-          <div className='max-w-[1000px] mx-auto px-20 mt-5'>
+          <div className='max-w-[1280px] mx-auto px-4 md:px-30 mt-5'>
             <button className='btn w-full  bg-linear-to-r from-[#d40101] to-[#1703ef] text-white font-semibold text-lg'>
               Create a Properties
             </button>
