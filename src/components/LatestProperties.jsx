@@ -8,7 +8,7 @@ const LatestProperties = ({LatestPropertiesPromise}) => {
   return (
     <div className='mx-auto mt-10'>
         <div className='flex justify-between items-center mb-2 px-3'>
-          <h1 className='text-4xl font-semibold'>Latest Properties</h1>
+          <h1 className='text-3xl font-semibold text-blue-700'>Latest Properties</h1>
           <Link to="/all-property" className='bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent font-semibold text-lg'>View All</Link>
         </div>
         <div className='mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 '>

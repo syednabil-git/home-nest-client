@@ -29,7 +29,7 @@ const MyProperty = () => {
     <div className='max-w-[1200px] mx-auto my-10'>
       
       {/* Title */}
-      <h1 className='text-3xl font-bold text-center mb-6'>
+      <h1 className='text-3xl font-bold text-center mb-6 text-blue-700'>
         My Products: <span className='text-purple-500'>{products.length}</span>
       </h1>
 
@@ -62,7 +62,7 @@ const MyProperty = () => {
         <div className="mt-3 flex gap-2">
           <Link
             to={`/edit-properties/${product._id}`}
-            className="flex-1 text-center py-1 rounded bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold"
+            className="flex-1 text-center py-1 rounded bg-gradient-to-r from-[#4a05ee] to-[#9F62F2] text-white font-semibold"
           >
             Edit
           </Link>
@@ -87,7 +87,7 @@ const MyProperty = () => {
         <table className="w-full border-collapse">
 
           {/* Head */}
-          <thead className="bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white">
+          <thead className="bg-gradient-to-r from-[#96e7ee] to-[#0b07e9] text-white">
             <tr className="text-center">
               <th className="p-3">SL No</th>
               <th className="p-3">Products</th>

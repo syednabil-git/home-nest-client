@@ -41,7 +41,7 @@ const MyRating = () => {
       
       <div>
         <div className="block md:hidden space-y-4">
-  <h1 className="text-3xl font-bold my-10 text-center">My Ratings</h1>
+  <h1 className="text-3xl font-bold my-10 text-center text-blue-700">My Ratings</h1>
 
   {ratings.map((item) => (
     <div key={item._id} className="rounded-xl shadow-sm p-4 bg-white">
@@ -86,7 +86,7 @@ const MyRating = () => {
 </div>
       </div>
       <div className='hidden md:block'>
-      <h1 className='text-3xl font-bold my-10 text-center'> My Ratings</h1>
+      <h1 className='text-3xl font-bold my-10 text-center text-blue-700'> My Ratings</h1>
        <div className="space-y-4">
         {ratings.map((item) => (
           <div

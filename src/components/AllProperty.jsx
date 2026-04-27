@@ -15,7 +15,7 @@ const AllProperty = () => {
    }, []);
   return (
     <div className='mx-auto'>
-      <h1 className='font-bold text-4xl text-center text-purple-500 my-10'>All Products</h1>
+      <h1 className='font-bold text-3xl text-center text-blue-700 my-10'>All Products</h1>
       <div className='mx-auto ml-10 md:ml-1 mr-1 md:mr-8'>
            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-auto'>
             {

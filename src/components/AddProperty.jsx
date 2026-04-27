@@ -6,7 +6,6 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 // import useAxios from '../hooks/useAxios';
 
 const AddProperty = () => {
-  // const axiosInstance = useAxios();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth()
   const handleAddProperty = e =>{
@@ -20,7 +19,6 @@ const AddProperty = () => {
     const description = e.target.description.value;
     const seller_contact = e.target.seller_contact.value;
     const category = e.target.category.value;
-    console.log(propertyName, image, propertyPrice, location, seller_image, date, category);
 
     const newProperties = {propertyName, image, propertyPrice, location, seller_image, date, description, seller_contact, category, 
       email: user.email,
@@ -122,7 +120,7 @@ const AddProperty = () => {
 
           {/* Button */}
           <div className='max-w-[1000px] mx-auto px-20 mt-5'>
-            <button className='btn w-full  bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold text-lg'>
+            <button className='btn w-full  bg-linear-to-r from-[#d40101] to-[#1703ef] text-white font-semibold text-lg'>
               Create a Properties
             </button>
           </div>

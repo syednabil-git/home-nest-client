@@ -5,15 +5,14 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const PropertiesDetails = () => {
-   const product = useLoaderData();
+  const product = useLoaderData();
   const productId = product?._id?.toString();
   const ratingModalRef = useRef(null);
   const [ratings, setRatings] = useState([]);
   const [selectedRating, setSelectedRating] = useState(0);
   const { user } = useContext(AuthContext);
-  
-  
-   useEffect(() => {
+
+  useEffect(() => {
   if (!productId) return;
 
   axios
@@ -24,10 +23,7 @@ const PropertiesDetails = () => {
     })
     .catch(err => console.log(err));
 
-  console.log("product:", product);
-  console.log("productId:", productId);
-
-}, [productId]);
+    }, [productId]);
 
 
   const avgRating = ratings.length > 0
