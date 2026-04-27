@@ -115,6 +115,92 @@ const Home = () => {
           </div>
          </div>
       </div>
+
+                   {/* what our client say */}
+       <h1 className='font-bold text-3xl text-center mt-10'>What Our Clients Say</h1>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-2 px-20 mt-2'>
+          <div className="max-w-xl mx-auto bg-white rounded-xl shadow-md p-4 space-y-3">
+
+                {/* TOP: User Info */}
+            <div className="flex items-center gap-3">
+              <img
+                  src="https://i.pravatar.cc/150?img=12"
+                  alt="user"
+                  className="w-12 h-12 rounded-full object-cover"
+                  />
+
+              <div>
+              <h3 className="font-semibold text-lg">Rahim Ahmed</h3>
+                <p className="text-sm text-gray-500">Dhaka, Bangladesh</p>
+              </div>
+            </div>
+
+                    {/* MESSAGE */}
+            <div className="text-gray-700 text-sm">
+                This property was amazing! Clean environment, great location and very friendly owner. Highly recommended.
+             </div>
+
+                  {/* STAR RATING */}
+              <div className="flex text-yellow-400 text-xl">
+                  ★ ★ ★ ★ ☆
+              </div>
+
+          </div>
+          <div className="max-w-xl mx-auto bg-white rounded-xl shadow-md p-4 space-y-3">
+
+                {/* TOP: User Info */}
+            <div className="flex items-center gap-3">
+              <img
+                  src="https://i.ibb.co.com/cHwsmHB/img7.jpg"
+                  alt="user"
+                  className="w-12 h-12 rounded-full object-cover"
+                  />
+
+              <div>
+              <h3 className="font-semibold text-lg">Mahin Mira</h3>
+                <p className="text-sm text-gray-500">Chittagang, Bangladesh</p>
+              </div>
+            </div>
+
+                    {/* MESSAGE */}
+            <div className="text-gray-700 text-sm">
+                Really impressed with the overall condition and facilities. The location is perfect and everything is easily accessible. Would definitely recommend this place to anyone looking for a comfortable stay.
+             </div>
+
+                  {/* STAR RATING */}
+              <div className="flex text-yellow-400 text-xl">
+                  ★ ★ ★ ★ ☆
+              </div>
+
+          </div>
+          <div className="max-w-xl mx-auto bg-white rounded-xl shadow-md p-4 space-y-3">
+
+                {/* TOP: User Info */}
+            <div className="flex items-center gap-3">
+              <img
+                  src="https://i.ibb.co.com/8g1KZx1X/img19.jpg"
+                  alt="user"
+                  className="w-12 h-12 rounded-full object-cover"
+                  />
+
+              <div>
+              <h3 className="font-semibold text-lg">Meherun Jannat Mila</h3>
+                <p className="text-sm text-gray-500">Patuakhali, Bangladesh</p>
+              </div>
+            </div>
+
+                    {/* MESSAGE */}
+            <div className="text-gray-700 text-sm">
+                The property was exactly as described. Very clean, well-maintained, and located in a peaceful area. The owner was friendly and responsive. I had a great experience staying here.
+             </div>
+
+                  {/* STAR RATING */}
+              <div className="flex text-yellow-400 text-xl">
+                  ★ ★ ★ ★ ☆
+              </div>
+
+          </div>
+      </div>             
   </div>
   )
 }
