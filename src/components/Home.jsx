@@ -8,7 +8,7 @@ import { CiTimer } from 'react-icons/ci';
 import axios from 'axios';
 import Property from './Property';
 
-const LatestPropertiesPromise = fetch('http://localhost:3000/latest-properties')
+const LatestPropertiesPromise = fetch('https://home-nest-server.onrender.com/latest-properties')
 .then(res => res.json());
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
   const [search, setSearch] = useState("");
 
 useEffect(() => {
-  axios.get('http://localhost:3000/products')
+  axios.get('https://home-nest-server.onrender.com/products')
   .then(res => setProducts(res.data));
 }, []);
 

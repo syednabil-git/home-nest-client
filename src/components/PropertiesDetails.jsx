@@ -16,7 +16,7 @@ const PropertiesDetails = () => {
   if (!productId) return;
 
   axios
-    .get(`http://localhost:3000/products/rating/${productId}`)
+    .get(`https://home-nest-server.onrender.com/products/rating/${productId}`)
     .then(res => {
       console.log('ratings:', res.data);
       setRatings(res.data);
@@ -57,7 +57,7 @@ const PropertiesDetails = () => {
       category: product.category,
     };
 
-    fetch('http://localhost:3000/rating', {
+    fetch('https://home-nest-server.onrender.com/rating', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newRating),

@@ -9,7 +9,7 @@ const AllProperty = () => {
    const [products, setProducts] = useState([]);
    const { user } = use(AuthContext);
    useEffect(() => {
-    axios.get('http://localhost:3000/products')
+    axios.get('https://home-nest-server.onrender.com/products')
       .then(res => setProducts(res.data));
         
    }, []);

@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
       {
       path: "/propertiesDetails/:id",
       loader: async ({ params }) => {
-      const res = await fetch(`http://localhost:3000/products/${params.id}`);
+      const res = await fetch(`https://home-nest-server.onrender.com/products/${params.id}`);
       return res.json();
       },
         element: <PropertiesDetails />
