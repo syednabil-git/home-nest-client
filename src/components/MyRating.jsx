@@ -53,7 +53,7 @@ const MyRating = () => {
         <img
           src={item.productInfo?.image || item.image}
           alt=""
-          className="w-24 h-20 rounded-lg object-cover"
+          className="w-24 h-20 flex-shrink-0 rounded-lg object-cover"
         />
 
         {/* INFO */}
@@ -64,7 +64,7 @@ const MyRating = () => {
               {item.propertyName}
             </h3>
 
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500 flex-shrink-0">
               {item.posted_date}
             </span>
           </div>
@@ -84,6 +84,8 @@ const MyRating = () => {
     </div>
   ))}
 </div>
+
+                {/* Desktop view */}
       </div>
       <div className='hidden md:block px-15'>
       <h1 className='text-3xl font-bold my-10 text-center text-blue-700'> My Ratings</h1>
@@ -98,7 +100,7 @@ const MyRating = () => {
                 <img
                  src={item.productInfo?.image || item.image}
                   alt="user"
-                 className="w-50 h-25 rounded-lg object-cover  mr-3"
+                 className="w-50 h-25 flex-shrink-0 rounded-lg object-cover  mr-3"
                   />
                 <div>
                  <h3 className="font-semibold">{item.propertyName}</h3>
@@ -109,7 +111,7 @@ const MyRating = () => {
                 </div>
               </div>
 
-              <p className="text-xs text-gray-700 font-bold">{item.posted_date}</p>
+              <p className="text-xs text-gray-700 font-bold flex-shrink-0">{item.posted_date}</p>
             </div>
           </div>
         ))}

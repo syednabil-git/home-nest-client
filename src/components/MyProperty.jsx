@@ -10,7 +10,7 @@ const MyProperty = () => {
   const { user } = useContext(AuthContext);
   useEffect(() => {
     if(user){
-    axiosSecure.get('/myproperty')
+    axiosSecure.get(`/myproperty?user_email=${user.email}`)
     .then(res => setProducts(res.data));
     }
   }, [user]);

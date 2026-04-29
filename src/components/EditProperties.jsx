@@ -28,7 +28,7 @@ const EditProperties = () => {
             email: "",
             seller_image: "",
             location: "",
-            description: "",
+            shortDescription: "",
             date: ""
         });
 
@@ -39,13 +39,13 @@ const EditProperties = () => {
                 propertyPrice: product.propertyPrice || "",
                 category: product.category || "",
                 image: product.image || "",
-                seller_name: product.seller_name || "",
+                seller_name: product.user_name || "",
                 seller_contact: product.seller_contact || "",
-                email: product.email || "",
+                email: product.user_email || "",
                 seller_image: product.seller_image || "",
                 location: product.location || "",
                 date: product.date || "",
-                description: product.description || "",
+                shortDescription: product.shortDescription || "",
             });
              setCondition(product.condition || "new");
         }
@@ -81,7 +81,7 @@ const EditProperties = () => {
   return (
      <div>
       <form onSubmit={handleUpdate}>
-        <div className='flex justify-between max-w-[1000px] mx-auto p-10 px-20 gap-5 items-start'>
+        <div className='flex justify-between max-w-[1280px] mx-auto px-4 md:px-30 gap-5 md:gap-20 items-start mt-15'>
             <div className='flex-1'>
               <fieldset className="fieldset">
               <legend className="fieldset-legend">Property Name</legend>
@@ -111,14 +111,14 @@ const EditProperties = () => {
              </div>  
         </div>
         {/* Your Product Image URL */}
-          <div className=' max-w-[1000px] mx-auto px-20 '>
+          <div className=' max-w-[1280px] mx-auto px-4 md:px-30 '>
              <fieldset className="fieldset">
               <legend className="fieldset-legend">Your Product Image URL</legend>
               <input type="text" onChange={handleChange} value={formData.seller_image} name='image' className="input w-full" placeholder="https://..." />
               </fieldset>
           </div>
           {/* saler part   */}
-          <div className='flex justify-between items-center max-w-[1000px] mx-auto px-20 gap-5'>
+          <div className='flex justify-between items-center max-w-[1280px] mx-auto px-4 md:px-30 gap-5 md:gap-20'>
              <div className='flex-1'>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Saler Name</legend>
@@ -141,22 +141,22 @@ const EditProperties = () => {
              </div>
           </div>
           {/* location */}
-          <div className='max-w-[1000px] mx-auto px-20'>
+          <div className='max-w-[1280px] mx-auto px-4 md:px-30 gap-5 md:gap-20'>
                <fieldset className="fieldset">
                <legend className="fieldset-legend">Location</legend>
                <input type="text" value={formData.location} onChange={handleChange} name='location' className="input w-full" placeholder="City, Country" />
                </fieldset>
           </div>
           {/* Simple Description about your Product */}
-          <div className='max-w-[1000px] mx-auto px-20'>
+          <div className='max-w-[1280px] mx-auto px-4 md:px-30'>
              <fieldset className="fieldset">
                <legend className="fieldset-legend">Simple Description about your Properties</legend>
-               <input type="text" onChange={handleChange} value={formData.description} name='description' className="input w-full h-30" placeholder="e.g. I bought this product 3 month ago. did not used more than 1/2 time. actually learning guitar is so tough..... " />
+               <input type="text" onChange={handleChange} value={formData.description} name='shortDescription' className="input w-full h-30" placeholder="e.g. I bought this product 3 month ago. did not used more than 1/2 time. actually learning guitar is so tough..... " />
               </fieldset>
           </div>
 
           {/* Button */}
-          <div className='max-w-[1000px] mx-auto px-20 mt-5'>
+          <div className='max-w-[1280px] mx-auto px-4 md:px-30 mt-5'>
             <button className='btn w-full  bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold text-lg'>
               update Properties
             </button>

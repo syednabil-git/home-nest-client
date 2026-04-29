@@ -15,13 +15,13 @@ const AddProperty = () => {
     const propertyPrice = e.target.propertyPrice.value;
     const location = e.target.location.value;
     const seller_image = e.target.seller_image.value;
-    const date = e.target.date.value;
-    const description = e.target.description.value;
+    const posted_date = e.target.posted_date.value;
+    const shortDescription = e.target.shortDescription.value;
     const seller_contact = e.target.seller_contact.value;
     const category = e.target.category.value;
 
-    const newProperties = {propertyName, image, propertyPrice, location, seller_image, date, description, seller_contact, category, 
-      email: user.email,
+    const newProperties = {propertyName, image, propertyPrice, location, seller_image, posted_date, shortDescription, seller_contact, category, 
+      user_email: user.email,
       user_name: user.displayName
     };
     
@@ -69,7 +69,7 @@ const AddProperty = () => {
                   
                    <fieldset className="fieldset">
                     <legend className="fieldset-legend">Posted Date</legend>
-                    <input type="date" name="date" defaultValue={new Date().toISOString().split("T")[0]} className="input w-full" />
+                    <input type="date" name="posted_date" defaultValue={new Date().toISOString().split("T")[0]} className="input w-full" />
                     </fieldset>
              </div>  
         </div>
@@ -95,7 +95,7 @@ const AddProperty = () => {
              <div className='flex-1'>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Seller Email</legend>
-                  <input type="text" name='email' className="input w-full" placeholder="leli31955@nrlord.com" />
+                  <input type="text" name='user_email' className="input w-full" placeholder="leli31955@nrlord.com" />
                 </fieldset>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Seller Image URL</legend>
@@ -114,7 +114,7 @@ const AddProperty = () => {
           <div className='max-w-[1280px] mx-auto px-4 md:px-30'>
              <fieldset className="fieldset">
                <legend className="fieldset-legend">Simple Description about your Properties</legend>
-               <input type="text" name='description' className="input w-full h-30" placeholder="e.g. I bought this product 3 month ago. did not used more than 1/2 time. actually learning guitar is so tough..... " />
+               <input type="text" name='shortDescription' className="input w-full h-30" placeholder="e.g. I bought this product 3 month ago. did not used more than 1/2 time. actually learning guitar is so tough..... " />
               </fieldset>
           </div>
 
